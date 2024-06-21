@@ -7,7 +7,7 @@ pub fn process_command(command_f: &str) -> i32 { // i32 is the code
     let mut parts = command_f.split_whitespace();
     let command: &str = parts.next().unwrap_or("");
     let args: Vec<&str> = parts.collect();
-    println!("Running \'{}\' with args {:?}", command, args);
+    // println!("Running \'{}\' with args {:?}", command, args);
     match command {
         "clear" => {
             let _ = Command::new("clear").status();
@@ -60,7 +60,7 @@ fn list_dir(args: Option<&[&str]>) -> io::Result<()> {
         Some(a) if !a.is_empty() => a[0], // Use the first argument as directory path
         _ => current_dir.to_str().unwrap(), // Default to current directory
     };
-    println!("Directory to list: {}", path);
+    // println!("Directory to list: {}", path);
 
     let dir_contents = fs::read_dir(path)?;
 
