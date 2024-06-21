@@ -1,6 +1,6 @@
 # Rust Commandline
 
-Why? idfk I felt like it.
+Why? idfk I felt like it.  
 It was a fun project though.
 
 ## how do i run this piece of crap?
