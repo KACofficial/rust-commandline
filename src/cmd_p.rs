@@ -48,8 +48,32 @@ pub fn process_command(command_f: &str) -> i32 { // i32 is the code
                 }
             }
         }
-        _ => 1
-    }
+        _ => {
+                if command.starts_with("!") {
+                    let command = &command[1..];
+                    let output = Command::new(command)
+                        .args(&args)
+                        .output();
+    
+                    match output {
+                        Ok(output) => {
+                            println!("{}", String::from_utf8_lossy(&output.stdout));
+                            if !output.stderr.is_empty() {
+                                eprintln!("{}", String::from_utf8_lossy(&output.stderr));
+                            }
+                            output.status.code().unwrap_or(1)
+                        }
+                        Err(err) => {
+                            eprintln!("Failed to execute command: {}", err);
+                            1
+                        }
+                    }
+                } else {
+                    eprintln!("Unknown command: {}", command);
+                    1
+                }
+            }
+        }
 }
 
 
